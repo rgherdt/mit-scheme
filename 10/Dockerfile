@@ -1,5 +1,5 @@
 # -*- mode: dockerfile; coding: utf-8 -*-
-FROM debian:buster-slim AS build
+FROM debian:bullseye-slim AS build
 RUN apt-get update && apt-get -y --no-install-recommends install \
       build-essential \
       m4 \
@@ -15,7 +15,7 @@ RUN ./configure
 RUN make
 RUN make install
 
-FROM debian:buster-slim
+FROM debian:bullseye-slim
 COPY --from=build /usr/local/ /usr/local/
 RUN ln -s mit-scheme /usr/local/bin/scheme-banner
 CMD ["scheme-banner"]
